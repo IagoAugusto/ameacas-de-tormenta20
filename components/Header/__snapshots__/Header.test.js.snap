@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders header 1`] = `
+<div>
+  <nav
+    class="bg-gray-800"
+  >
+    Criar Ameaças
+  </nav>
+</div>
+`;
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <nav
+    class="bg-gray-800"
+  >
+    Criar Ameaças
+  </nav>
+</div>
+`;
