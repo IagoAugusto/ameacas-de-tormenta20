@@ -3,10 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 
 import styles from "@/pages/index.module.css";
-import Header from "@/components/Header";
-import Form from "@/components/Form";
-import CharacterSheet from "@/components/CharacterSheet";
-import { NívelResistência, Roles } from "types/characterSheet";
+import Header from "@/layout/Header";
+import Form from "@/features/Form";
+import Sheet from "@/features/Sheet";
+import { NívelResistência, Roles } from "@/features/Sheet/types/sheet";
 
 interface Statistics {
   name: string;
@@ -20,8 +20,7 @@ interface Statistics {
 export default function Home() {
   const [statistics, setStatistics] = useState<Statistics | null>(null);
 
-  function handleSubmitForm(result: Statistics) {
-    console.log("result", result);
+  function handleSubmit(result: Statistics) {
     setStatistics(result);
   }
 
@@ -36,10 +35,10 @@ export default function Home() {
 
       <main className="bg-gray-100 w-full container">
         <h1 className="text-red text-6xl mb-12">Ficha da Criatura</h1>
-        <div className="grid grid-cols-2 gap-6">
-          <Form onSubmit={handleSubmitForm} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Form onSubmit={handleSubmit} />
           {statistics && (
-            <CharacterSheet
+            <Sheet
               name={statistics.name}
               nd={statistics.nd}
               role={statistics.role}

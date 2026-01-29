@@ -8,21 +8,12 @@ interface InputProps extends InputHTMLAttributes<unknown> {
 }
 
 function Input(
-  { className, error, label, ...props }: InputProps,
+  { className, error, label, name, ...props }: InputProps,
   ref: Ref<HTMLInputElement>
 ) {
-  function getErrorMessage(error: string) {
-    switch (error) {
-      case "required":
-        return "Campo obrigatório";
-      default:
-        return "Erro desconhecido";
-    }
-  }
-
   return (
-    <div className={classNames("flex flex-col", className)}>
-      <label className="text-black">{label}</label>
+    <div className={classNames("flex flex-col col-span-1", className)}>
+      <label className="text-black" htmlFor={name}>{label}</label>
       <input
         className={classNames("p-3 rounded-md border-solid border-2", {
           "border-black": !error,
@@ -33,7 +24,7 @@ function Input(
       />
       {error && (
         <span className="text-red">
-          {error.message || getErrorMessage(error.type)}
+          {error.message}
         </span>
       )}
     </div>

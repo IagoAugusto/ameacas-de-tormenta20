@@ -16,9 +16,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/pages/*": ["pages/*"],
-      "@/styles/*": ["styles/*"]
+      "@/*": ["src/*"],
     }
   },
   "include": [
@@ -26,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "types.d.ts",
-    "components/Header/Header.test.js"
+    "src/layout/Header/Header.test.js"
   ],
   "exclude": ["node_modules"]
 }

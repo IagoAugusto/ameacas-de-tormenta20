@@ -8,31 +8,24 @@ interface SelectProps extends SelectHTMLAttributes<unknown> {
 }
 
 function Select(
-  { children, className, error, label, ...selectProps }: SelectProps,
+  { children, className, error, label, name, ...selectProps }: SelectProps,
   ref: React.Ref<HTMLSelectElement>
 ) {
-  function getErrorMessage(error: string) {
-    switch (error) {
-      case "required":
-        return "Campo obrigatório";
-      default:
-        return "Erro desconhecido";
-    }
-  }
-
   return (
-    <div className={classNames("flex flex-col", className)}>
-      <label htmlFor="name">{label}</label>
+    <div className={classNames("flex flex-col col-span-1", className)}>
+      <label htmlFor={name}>{label}</label>
       <select
         className="p-3 rounded-md border-solid border-2 border-black"
         ref={ref}
+        id={name}
+        name={name}
         {...selectProps}
       >
         {children}
       </select>
       {error && (
         <span className="text-red">
-          {error.message || getErrorMessage(error.type)}
+          {error.message}
         </span>
       )}
     </div>
