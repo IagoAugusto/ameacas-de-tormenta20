@@ -6,24 +6,16 @@ import styles from "@/pages/index.module.css";
 import Header from "@/layout/Header";
 import Form from "@/features/Form";
 import Sheet from "@/features/Sheet";
-import { NívelResistência, Roles } from "@/features/Sheet/types/sheet";
-
-interface Statistics {
-  name: string;
-  nd: string;
-  role: Roles;
-  fortitude: NívelResistência;
-  reflexos: NívelResistência;
-  vontade: NívelResistência;
-}
+import { SavingThrows, Roles } from "@/features/Sheet/types/sheet";
+import { FormInput } from "@/features/Form/Form.types";
 
 export default function Home() {
-  const [statistics, setStatistics] = useState<Statistics | null>(null);
+  const [statistics, setStatistics] = useState<FormInput>();
 
-  function handleSubmit(result: Statistics) {
+  function handleSubmit(result: FormInput) {
     setStatistics(result);
   }
-
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -37,16 +29,7 @@ export default function Home() {
         <h1 className="text-red text-6xl mb-12">Ficha da Criatura</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Form onSubmit={handleSubmit} />
-          {statistics && (
-            <Sheet
-              name={statistics.name}
-              nd={statistics.nd}
-              role={statistics.role}
-              fortitude={statistics.fortitude}
-              reflexos={statistics.reflexos}
-              vontade={statistics.vontade}
-            />
-          )}
+          {statistics && <Sheet {...statistics} />}
         </div>
       </main>
 

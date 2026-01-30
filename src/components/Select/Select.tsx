@@ -9,13 +9,16 @@ interface SelectProps extends SelectHTMLAttributes<unknown> {
 
 function Select(
   { children, className, error, label, name, ...selectProps }: SelectProps,
-  ref: React.Ref<HTMLSelectElement>
+  ref: React.Ref<HTMLSelectElement>,
 ) {
   return (
     <div className={classNames("flex flex-col col-span-1", className)}>
       <label htmlFor={name}>{label}</label>
       <select
-        className="p-3 rounded-md border-solid border-2 border-black"
+        className={classNames(
+          "p-3 rounded-md border-solid border-2 border-black",
+          { "border-red": error },
+        )}
         ref={ref}
         id={name}
         name={name}
@@ -23,11 +26,7 @@ function Select(
       >
         {children}
       </select>
-      {error && (
-        <span className="text-red">
-          {error.message}
-        </span>
-      )}
+      {error && <span className="text-red">{error.message}</span>}
     </div>
   );
 }

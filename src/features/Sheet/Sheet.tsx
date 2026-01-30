@@ -1,35 +1,26 @@
-// TODO: Depende no tipo de criatura
 import { useMemo } from "react";
-// import { Statistics, estatisticaLacaio } from "./tableByTypes";
-import { Roles, NívelResistência } from "@/features/Sheet/types/sheet";
-import minions from "./data/minions-table";
-
-interface CharacterSheetProps {
-  nd: string;
-  name: string;
-  role: Roles;
-  fortitude: NívelResistência;
-  reflexos: NívelResistência;
-  vontade: NívelResistência;
-}
-
-const statistics: { [name: string]: Array<(typeof minions)[0]> } = {
-  lacaio: minions,
-};
+import {
+  CharacterSheetProps,
+  SavingThrows,
+  Statistic,
+  statistics,
+} from "@/features/Sheet/types/sheet";
 
 function CharacterSheet({
-  name,
   nd,
   role,
-  fortitude,
-  vontade,
-  reflexos,
+  weak,
+  medium,
+  strong,
 }: CharacterSheetProps) {
   function findStatisticByND(nd: string) {
-    return statistics[role]?.find((statistic) => statistic.ND === nd);
+    return (
+      statistics[role]?.find((statistic) => statistic.ND === nd) ??
+      statistics[role][0]
+    );
   }
 
-  const statistic = useMemo(() => findStatisticByND(nd), [nd, role]);
+  const statistic: Statistic = useMemo(() => findStatisticByND(nd), [nd, role]);
 
   //TODO: Calcular dano médio baseado no tipo de criatura
   function getDamageRoll(damage: number | undefined) {
@@ -39,6 +30,17 @@ function CharacterSheet({
     return `1D${averageDamage}+${averageDamage}`;
   }
 
+  function addPlusSign(value: number) {
+    return value >= 0 ? `+${value}` : `${value}`;
+  }
+
+  function getSavingThrowLabel(savingThrow: SavingThrows): string {
+    if (weak === savingThrow) return `${addPlusSign(statistic?.weak)}`;
+    if (medium === savingThrow) return `${addPlusSign(statistic?.medium || 0)}`;
+    if (strong === savingThrow) return `${addPlusSign(statistic?.strong || 0)}`;
+    return "";
+  }
+
   return (
     <div className="character-sheet">
       <div className="border-b-2 border-primary pb-2 mb-2">
@@ -46,24 +48,24 @@ function CharacterSheet({
           <span>Criatura</span>
           <span>ND {nd}</span>
         </div>
-        <p className="flex">
+        <div className="flex">
           <div>
             <span className="text-primary font-bold">Defesa: </span>
             <span>{statistic?.defesa},&nbsp;</span>
           </div>
           <div>
-            <span className="text-primary font-bold">Resistência Forte: </span>
-            <span>{statistic?.resistência_forte},&nbsp;</span>
+            <span className="text-primary font-bold">Fort </span>
+            <span>{getSavingThrowLabel("fortitude")},&nbsp;</span>
           </div>
           <div>
-            <span className="text-primary font-bold">Resistência Média: </span>
-            <span>{statistic?.resistência_média},&nbsp;</span>
+            <span className="text-primary font-bold">Ref </span>
+            <span>{getSavingThrowLabel("reflex")},&nbsp;</span>
           </div>
           <div>
-            <span className="text-primary font-bold">Resistência Fraca:</span>
-            <span>{statistic?.resistência_fraca}</span>
+            <span className="text-primary font-bold">Von </span>
+            <span>{getSavingThrowLabel("will")}</span>
           </div>
-        </p>
+        </div>
         <div>
           <span className="text-primary font-bold">Pontos de Vida: </span>
           <span>{statistic?.PV}</span>
