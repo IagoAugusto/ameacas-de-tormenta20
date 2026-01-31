@@ -14,7 +14,7 @@ export default function Home() {
   function handleSubmit(result: FormInput) {
     setStatistics(result);
   }
-  
+
   return (
     <div className={styles.container}>
       <Head>

@@ -1,12 +1,18 @@
 import Select from "@/components/Select";
-import classNames from "classnames";
+import { FieldError } from "react-hook-form";
+
+interface SavingThrowsSelectProps {
+  label?: string;
+  error?: FieldError;
+  removedOptions?: string[];
+}
 
 export default function SavingThrowsSelect({
   label,
   error,
   removedOptions,
   ...props
-}: any) {
+}: SavingThrowsSelectProps) {
   return (
     <Select {...props} error={error} label={label}>
       <option value="">Selecione</option>

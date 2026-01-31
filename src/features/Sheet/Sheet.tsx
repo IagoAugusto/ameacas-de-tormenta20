@@ -5,6 +5,7 @@ import {
   Statistic,
   statistics,
 } from "@/features/Sheet/types/sheet";
+import { useStaticticSheet } from "./hook/useSheet";
 
 function CharacterSheet({
   nd,
@@ -12,22 +13,21 @@ function CharacterSheet({
   weak,
   medium,
   strong,
+  attacks,
 }: CharacterSheetProps) {
-  function findStatisticByND(nd: string) {
-    return (
-      statistics[role]?.find((statistic) => statistic.ND === nd) ??
-      statistics[role][0]
-    );
-  }
+  console.log(attacks);
+  const statistic = useStaticticSheet(nd, role);
 
-  const statistic: Statistic = useMemo(() => findStatisticByND(nd), [nd, role]);
+  function getDamageRoll(
+    averageDamage: number | undefined,
+    attackDamage: string,
+  ): string {
+    if (!averageDamage) return "";
+    const diceQuantity = parseInt(attackDamage.split("d")[0]);
+    const damageDice = parseInt(attackDamage.split("d")[1]);
 
-  //TODO: Calcular dano médio baseado no tipo de criatura
-  function getDamageRoll(damage: number | undefined) {
-    if (!damage) return "";
-
-    const averageDamage = Math.floor(damage / 2);
-    return `1D${averageDamage}+${averageDamage}`;
+    const extraDamage = averageDamage - diceQuantity * damageDice;
+    return `${attackDamage}+${extraDamage}`;
   }
 
   function addPlusSign(value: number) {
@@ -35,9 +35,9 @@ function CharacterSheet({
   }
 
   function getSavingThrowLabel(savingThrow: SavingThrows): string {
-    if (weak === savingThrow) return `${addPlusSign(statistic?.weak)}`;
-    if (medium === savingThrow) return `${addPlusSign(statistic?.medium || 0)}`;
-    if (strong === savingThrow) return `${addPlusSign(statistic?.strong || 0)}`;
+    if (weak === savingThrow) return `${addPlusSign(statistic.weak)}`;
+    if (medium === savingThrow) return `${addPlusSign(statistic.medium || 0)}`;
+    if (strong === savingThrow) return `${addPlusSign(statistic.strong || 0)}`;
     return "";
   }
 
@@ -71,11 +71,17 @@ function CharacterSheet({
           <span>{statistic?.PV}</span>
         </div>
       </div>
-      <div>
-        <span className="text-primary font-bold">Ataque </span>
-        <span>+{statistic?.bônus_de_ataque} </span>
-        <span>({getDamageRoll(statistic?.dano_médio)}, 19).</span>
-      </div>
+      {attacks.map((attack, index) => (
+        <div key={index}>
+          <span className="text-primary font-bold">
+            {attack.type === "melee" ? "Corpo a Corpo" : "Distância"}{" "}
+          </span>
+          <span>+{statistic?.bônus_de_ataque} </span>
+          <span>
+            ({getDamageRoll(statistic?.dano_médio, attack.damage)}, 19).
+          </span>
+        </div>
+      ))}
       <div>
         <span className="text-primary font-bold">CD de Resistência </span>
         <span>{statistic?.efeito}</span>

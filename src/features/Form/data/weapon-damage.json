@@ -1,0 +1,90 @@
+[
+  {
+    "minus_2_steps": "1",
+    "minus_1_step": "1d2",
+    "normal": "1d3",
+    "plus_1_step": "1d4",
+    "plus_2_steps": "1d6",
+    "plus_3_steps": "1d8"
+  },
+  {
+    "minus_2_steps": "1d2",
+    "minus_1_step": "1d3",
+    "normal": "1d4",
+    "plus_1_step": "1d6",
+    "plus_2_steps": "1d8",
+    "plus_3_steps": "1d10"
+  },
+  {
+    "minus_2_steps": "1d3",
+    "minus_1_step": "1d4",
+    "normal": "1d6",
+    "plus_1_step": "1d8",
+    "plus_2_steps": "1d10",
+    "plus_3_steps": "1d12"
+  },
+  {
+    "minus_2_steps": "1d4",
+    "minus_1_step": "1d6",
+    "normal": "1d8",
+    "plus_1_step": "1d10",
+    "plus_2_steps": "1d12",
+    "plus_3_steps": "3d6"
+  },
+  {
+    "minus_2_steps": "1d4",
+    "minus_1_step": "1d6",
+    "normal": "2d4",
+    "plus_1_step": "1d10",
+    "plus_2_steps": "1d12",
+    "plus_3_steps": "3d6"
+  },
+  {
+    "minus_2_steps": "1d6",
+    "minus_1_step": "1d8",
+    "normal": "1d10",
+    "plus_1_step": "1d12",
+    "plus_2_steps": "3d6",
+    "plus_3_steps": "4d6"
+  },
+  {
+    "minus_2_steps": "1d8",
+    "minus_1_step": "1d10",
+    "normal": "1d12",
+    "plus_1_step": "3d6",
+    "plus_2_steps": "4d6",
+    "plus_3_steps": "4d8"
+  },
+  {
+    "minus_2_steps": "1d8",
+    "minus_1_step": "1d10",
+    "normal": "2d6",
+    "plus_1_step": "3d6",
+    "plus_2_steps": "4d6",
+    "plus_3_steps": "4d8"
+  },
+  {
+    "minus_2_steps": "1d8",
+    "minus_1_step": "1d10",
+    "normal": "3d4",
+    "plus_1_step": "3d6",
+    "plus_2_steps": "4d6",
+    "plus_3_steps": "4d8"
+  },
+  {
+    "minus_2_steps": "1d10",
+    "minus_1_step": "2d6",
+    "normal": "2d8",
+    "plus_1_step": "3d8",
+    "plus_2_steps": "4d8",
+    "plus_3_steps": "4d10"
+  },
+  {
+    "minus_2_steps": "2d6",
+    "minus_1_step": "2d8",
+    "normal": "2d10",
+    "plus_1_step": "3d10",
+    "plus_2_steps": "4d10",
+    "plus_3_steps": "4d12"
+  }
+]

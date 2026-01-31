@@ -1,17 +1,12 @@
 import minions from "@/features/Form/data/minions.json";
 import especiais from "@/features/Form/data/especiais.json";
 import solos from "@/features/Form/data/solos.json";
+import { FormInput } from "@/features/Form/types/Form.types";
 
 export type Roles = "lacaio" | "solo" | "especial";
 export type SavingThrows = "reflex" | "will" | "fortitude";
 
-export interface CharacterSheetProps {
-  nd: string;
-  role: Roles;
-  weak: SavingThrows | null;
-  medium: SavingThrows | null;
-  strong: SavingThrows | null;
-}
+export interface CharacterSheetProps extends FormInput {}
 
 export type StatisticsTable = {
   [K in Roles]: Statistic[];

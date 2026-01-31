@@ -10,4 +10,5 @@ export const IntialForm: FormInput = {
   strong: null,
   nd: "",
   role: "lacaio",
+  attacks: [{ damage: "", type: "" }],
 };
