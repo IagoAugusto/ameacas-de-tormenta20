@@ -28,6 +28,17 @@ export default function Attacks() {
     return diceQuantity * damageDice;
   }
 
+  function addAttack(index: number) {
+    setAttacks((prev) => [
+      ...prev,
+      {
+        id: uuid(),
+        damage: formAttacks[index].damage,
+        type: formAttacks[index].type,
+      },
+    ]);
+  }
+
   return (
     <fieldset className="attacks grid grid-cols-1 md:grid-cols-3 gap-3">
       {attacks.map((attack, index) => (
@@ -61,20 +72,11 @@ export default function Attacks() {
             ))}
           </Select>
 
-          {index === formAttacks.length - 1 && (
+          {index === attacks.length - 1 && (
             <button
               type="button"
               className="w-max mt-6 px-3 py-0 border font-semibold rounded-full bg-primary text-white hover:bg-primary-dark"
-              onClick={() =>
-                setAttacks((prev) => [
-                  ...prev,
-                  {
-                    id: uuid(),
-                    damage: formAttacks[index].damage,
-                    type: formAttacks[index].type,
-                  },
-                ])
-              }
+              onClick={() => addAttack(index)}
             >
               +
             </button>
