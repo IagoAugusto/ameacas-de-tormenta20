@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import Select from "@/components/Select";
 import SavingThrowsSelect from "./components/SavingThrowsSelect";
-import { FormInput, FormProps } from "./Form.types";
-import { IntialForm } from "./Form.model";
+import { FormInput, FormProps } from "./types/Form.types";
+import { IntialForm, roles } from "./types/Form.model";
 import { validationSchema } from "./schemas/Form.yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import minions from "./data/minions.json";
 
 function Form({ onSubmit }: FormProps) {
   const {
@@ -32,18 +33,19 @@ function Form({ onSubmit }: FormProps) {
         </legend>
 
         <Select error={errors.role} label="Papel" {...register("role")}>
-          <option value="lacaio">Lacaio</option>
-          <option value="solo">Solo</option>
-          <option value="especialista">Especialista</option>
+          {roles.map((role) => (
+            <option key={role} value={role}>
+              {role.charAt(0).toUpperCase() + role.slice(1)}
+            </option>
+          ))}
         </Select>
 
         <Select error={errors.nd} label="ND" {...register("nd")}>
-          <option value="1/4">Iniciante 1/4</option>
-          <option value="1/2">Iniciante 1/2</option>
-          <option value="1">Iniciante 1</option>
-          <option value="2">Iniciante 2</option>
-          <option value="3">Iniciante 3</option>
-          <option value="4">Iniciante 4</option>
+          {minions.map((minion) => (
+            <option key={minion.ND} value={minion.ND}>
+              {minion.patamar} {minion.ND}
+            </option>
+          ))}
         </Select>
       </fieldset>
 

@@ -1,9 +1,7 @@
 import { Roles, SavingThrows } from "@/features/Sheet/types/sheet";
 import * as yup from "yup";
-import { FormInput } from "../Form.types";
-
-const roles: Roles[] = ["lacaio", "solo", "especialista"];
-const savingThrows: SavingThrows[] = ["fortitude", "reflex", "will"];
+import { FormInput } from "../types/Form.types";
+import { roles, savingThrows } from "../types/Form.model";
 
 export const validationSchema: yup.ObjectSchema<FormInput> = yup.object({
   role: yup.mixed<Roles>().oneOf(roles, "Invalid value").required("Required"),

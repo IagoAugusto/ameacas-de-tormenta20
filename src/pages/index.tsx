@@ -6,8 +6,7 @@ import styles from "@/pages/index.module.css";
 import Header from "@/layout/Header";
 import Form from "@/features/Form";
 import Sheet from "@/features/Sheet";
-import { SavingThrows, Roles } from "@/features/Sheet/types/sheet";
-import { FormInput } from "@/features/Form/Form.types";
+import { FormInput } from "@/features/Form/types/Form.types";
 
 export default function Home() {
   const [statistics, setStatistics] = useState<FormInput>();

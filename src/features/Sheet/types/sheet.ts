@@ -1,6 +1,8 @@
-import minions from "../data/minions-table";
+import minions from "@/features/Form/data/minions.json";
+import especiais from "@/features/Form/data/especiais.json";
+import solos from "@/features/Form/data/solos.json";
 
-export type Roles = "lacaio" | "solo" | "especialista";
+export type Roles = "lacaio" | "solo" | "especial";
 export type SavingThrows = "reflex" | "will" | "fortitude";
 
 export interface CharacterSheetProps {
@@ -11,12 +13,14 @@ export interface CharacterSheetProps {
   strong: SavingThrows | null;
 }
 
-export interface StatisticsTable {
-  [name: string]: Array<(typeof minions)[0]>;
-}
+export type StatisticsTable = {
+  [K in Roles]: Statistic[];
+};
 
 export const statistics: StatisticsTable = {
   lacaio: minions,
+  solo: solos,
+  especial: especiais,
 };
 
 export interface Statistic {
