@@ -57,7 +57,6 @@ export default function Attacks() {
             label="Dano do Ataque"
             tooltip="Valores de dano inferiores ao padrão para ND selecionada ficam desabilitados."
           >
-            <option value="">Selecionar</option>
             {weaponDamage.map((weapon) => (
               <option
                 key={weapon.normal}

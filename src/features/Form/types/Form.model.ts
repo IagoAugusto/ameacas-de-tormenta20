@@ -10,7 +10,7 @@ export const IntialForm: FormInput = {
   strong: null,
   nd: "1/4",
   role: "lacaio",
-  attacks: [{ damage: "", type: "melee" }],
+  attacks: [{ damage: "1d4", type: "melee" }],
   strength: 0,
   dexterity: 0,
   constitution: 0,
