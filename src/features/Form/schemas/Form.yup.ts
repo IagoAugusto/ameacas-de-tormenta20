@@ -30,10 +30,22 @@ export const validationSchema: yup.ObjectSchema<FormInput> = yup.object({
       "Precisa ser diferente dos outros testes de resistência",
     )
     .required("Obrigatório"),
-  attacks: yup.array().of(
-    yup.object().shape({
-      type: yup.string(),
-      damage: yup.string(),
-    }),
-  ),
+  attacks: yup
+    .array()
+    .of(
+      yup.object().shape({
+        type: yup
+          .string()
+          .oneOf(["melee", "range"], "Tipo inválido")
+          .required(),
+        damage: yup.string().required(),
+      }),
+    )
+    .required(),
+  strength: yup.number().min(0, "Mínimo 0").required(),
+  dexterity: yup.number().min(0, "Mínimo 0").required(),
+  constitution: yup.number().min(0, "Mínimo 0").required(),
+  intelligence: yup.number().min(0, "Mínimo 0").required(),
+  wisdom: yup.number().min(0, "Mínimo 0").required(),
+  charisma: yup.number().min(0, "Mínimo 0").required(),
 });
