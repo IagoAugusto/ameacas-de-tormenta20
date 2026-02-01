@@ -7,11 +7,9 @@ function Header() {
       as="nav"
       className="w-full bg-red flex text-white h-16 items-center px-3"
     >
+      <img src="/logo.png" alt="Logo" className="h-12 w-12 mr-2" />
       <div className="border-b-2 h-full items-center inline-flex">
         <Link href="/criar-ameacas">Criar Ameaças</Link>
-      </div>
-      <div className="px-2 sm:px-6 lg:px-8">
-        <Link href="/criar-ameacas">Calcular ND</Link>
       </div>
     </Disclosure>
   );

@@ -48,7 +48,6 @@ export default function Attacks() {
             {...register(`attacks.${index}.type`)}
             label="Tipo de Ataque"
           >
-            <option value="">Selecionar</option>
             <option value="melee">Corpo a Corpo</option>
             <option value="range">À Distância</option>
           </Select>

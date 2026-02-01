@@ -12,6 +12,7 @@ export default function Home() {
   const [statistics, setStatistics] = useState<FormInput>();
 
   function handleSubmit(result: FormInput) {
+    console.log("Form submitted with data:", result);
     setStatistics(result);
   }
 
@@ -24,8 +25,8 @@ export default function Home() {
 
       <Header />
 
-      <main className="bg-gray-100 w-full container">
-        <h1 className="text-red text-6xl mb-12">Ficha da Criatura</h1>
+      <main className="w-full container">
+        <h1 className="text-red text-6xl mb-12 font-metamorphous">Criação de Ameaças</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Form onSubmit={handleSubmit} />
           {statistics && <Sheet {...statistics} />}

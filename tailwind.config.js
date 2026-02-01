@@ -1,12 +1,10 @@
-/** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-
-    // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -22,7 +20,15 @@ module.exports = {
       white: "#ffffff",
       black: "#000000",
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+        header: ["var(--font-cinzel)"],
+        crimson: ["var(--font-crimson-text)"],
+        metamorphous: ["var(--font-metamorphous)"],
+        ebGaramond: ["var(--font-eb-garamond)"],
+      },
+    },
   },
   plugins: [],
 };

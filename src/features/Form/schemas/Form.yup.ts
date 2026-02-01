@@ -8,26 +8,32 @@ export const validationSchema: yup.ObjectSchema<FormInput> = yup.object({
   nd: yup.string().required("Required"),
   strong: yup
     .mixed<SavingThrows>()
-    .oneOf(savingThrows, "Invalid value")
+    .oneOf(savingThrows, "Obrigatório")
     .notOneOf(
       [yup.ref("medium"), yup.ref("weak")],
-      "Must be different from other saving throws",
+      "Precisa ser diferente dos outros testes de resistência",
     )
-    .required("required"),
+    .required("Obrigatório"),
   medium: yup
     .mixed<SavingThrows>()
-    .oneOf(savingThrows, "Invalid value")
+    .oneOf(savingThrows, "Obrigatório")
     .notOneOf(
       [yup.ref("strong"), yup.ref("weak")],
-      "Must be different from other saving throws",
+      "Precisa ser diferente dos outros testes de resistência",
     )
-    .required("Required"),
+    .required("Obrigatório"),
   weak: yup
     .mixed<SavingThrows>()
-    .oneOf(savingThrows, "Invalid value")
+    .oneOf(savingThrows, "Obrigatório")
     .notOneOf(
       [yup.ref("strong"), yup.ref("medium")],
-      "Must be different from other saving throws",
+      "Precisa ser diferente dos outros testes de resistência",
     )
-    .required("Required"),
+    .required("Obrigatório"),
+  attacks: yup.array().of(
+    yup.object().shape({
+      type: yup.string(),
+      damage: yup.string(),
+    }),
+  ),
 });

@@ -6,11 +6,8 @@ import { IntialForm, roles } from "./types/Form.model";
 import { validationSchema } from "./schemas/Form.yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import minions from "./data/minions.json";
-
-import { Statistic, statistics } from "@/features/Sheet/types/sheet";
-import { useMemo } from "react";
-import { useStaticticSheet } from "../Sheet/hook/useSheet";
 import Attacks from "./components/Attacks";
+import Input from "@/components/Input";
 
 function Form({ onSubmit }: FormProps) {
   const methods = useForm<FormInput>({
@@ -26,7 +23,8 @@ function Form({ onSubmit }: FormProps) {
   } = methods;
 
   const onChangeSavingThrow = async () => {
-    const dirtyFieldsNumber = Object.keys(dirtyFields).length;
+    const { strong, medium, weak } = dirtyFields;
+    const dirtyFieldsNumber = [strong, medium, weak].filter(Boolean).length;
     if (dirtyFieldsNumber >= 2) {
       await trigger(["strong", "medium", "weak"]);
     }
@@ -38,6 +36,53 @@ function Form({ onSubmit }: FormProps) {
         className="grid grid-cols-1 gap-6"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <fieldset className="grid grid-cols-3 md:grid-cols-6 gap-3">
+          <legend className="text-primary text-xl font-bold mb-2">
+            <h2>Atributos</h2>
+          </legend>
+          <Input
+            {...register("strength", { valueAsNumber: true })}
+            label="For"
+            type="number"
+            min="0"
+            max="20"
+          />
+          <Input
+            {...register("dexterity", { valueAsNumber: true })}
+            label="Des"
+            type="number"
+            min="-5"
+            max="20"
+          />
+          <Input
+            {...register("constitution", { valueAsNumber: true })}
+            label="Con"
+            type="number"
+            min="0"
+            max="20"
+          />
+          <Input
+            {...register("intelligence", { valueAsNumber: true })}
+            label="Int"
+            type="number"
+            min="-5"
+            max="20"
+          />
+          <Input
+            {...register("wisdom", { valueAsNumber: true })}
+            label="Sab"
+            type="number"
+            min="-5"
+            max="20"
+          />
+          <Input
+            {...register("charisma", { valueAsNumber: true })}
+            label="Car"
+            type="number"
+            min="-5"
+            max="20"
+          />
+        </fieldset>
         <fieldset className="grid grid-cols-2 md:grid-cols-3 gap-3">
           <legend className="text-primary text-xl font-bold mb-2">
             <h2>Conceito e ND</h2>
