@@ -1,9 +1,5 @@
 import { Roles, SavingThrows } from "@/features/Sheet/types/sheet";
-
-interface Attack {
-  damage: string;
-  type: "melee" | "range";
-}
+import { Attack } from "../components/Attacks/Attacks.types";
 
 export interface FormInput {
   nd: string;

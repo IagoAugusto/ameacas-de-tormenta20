@@ -5,22 +5,25 @@ import { useFormContext } from "react-hook-form";
 import { FormInput } from "../../types/Form.types";
 import { Fragment, useState } from "react";
 import uuid from "react-uuid";
+import Input from "@/components/Input";
+import { Attack, AttackType } from "./Attacks.types";
+import Autocomplete from "@/components/Autocomplete/Autocomplete";
 
-const initialAttack = { id: uuid(), damage: "", type: "" };
-
-interface Attacks {
-  id: string;
-  damage: string;
-  type: string;
-}
+const initialAttack = {
+  id: uuid(),
+  name: "",
+  damage: "",
+  type: AttackType.MELEE,
+};
 
 export default function Attacks() {
-  const [attacks, setAttacks] = useState<Attacks[]>([initialAttack]);
+  const [attacks, setAttacks] = useState<Attack[]>([initialAttack]);
   const { register, watch } = useFormContext<FormInput>();
   const nd = watch("nd");
   const role = watch("role");
   const formAttacks = watch("attacks");
   const statistic = useStaticticSheet(nd, role);
+  console.log("statistic", watch(`attacks.0.name`));
 
   function getDiceAndDamage(attackDamage: string): number {
     const diceQuantity = parseInt(attackDamage.split("d")[0]);
@@ -33,6 +36,7 @@ export default function Attacks() {
       ...prev,
       {
         id: uuid(),
+        name: formAttacks[index].name,
         damage: formAttacks[index].damage,
         type: formAttacks[index].type,
       },
@@ -40,21 +44,38 @@ export default function Attacks() {
   }
 
   return (
-    <fieldset className="attacks grid grid-cols-1 md:grid-cols-3 gap-3">
+    <fieldset className="attacks grid grid-cols-1 lg:grid-cols-6 gap-3">
+      <legend className="text-primary text-xl font-bold mb-2">
+        <h2>Ataques</h2>
+      </legend>
       {attacks.map((attack, index) => (
         <Fragment key={attack.id}>
+          <Autocomplete
+            className="md:col-span-2"
+            name={`attacks.${index}.name`}
+            label="Nome do Ataque"
+            placeholder="Comece a digitar..."
+            options={[
+              "Faro",
+              "Visão no Escuro",
+              "Presença Aterradora",
+              "Agarrar Aprimorado",
+              "Imunidade a Fogo",
+            ]}
+          />
           <Select
-            className="md:col-end-2"
+            className="md:col-span-2"
             {...register(`attacks.${index}.type`)}
             label="Tipo de Ataque"
           >
-            <option value="melee">Corpo a Corpo</option>
-            <option value="range">À Distância</option>
+            <option value={AttackType.MELEE}>Corpo a Corpo</option>
+            <option value={AttackType.RANGE}>À Distância</option>
           </Select>
 
           <Select
+            className="md:col-span-1"
             {...register(`attacks.${index}.damage`)}
-            label="Dano do Ataque"
+            label="Dano"
             tooltip="Valores de dano inferiores ao padrão para ND selecionada ficam desabilitados."
           >
             {weaponDamage.map((weapon) => (

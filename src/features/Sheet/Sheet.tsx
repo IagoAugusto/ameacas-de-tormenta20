@@ -7,6 +7,7 @@ import {
 } from "@/features/Sheet/types/sheet";
 import { useStaticticSheet } from "./hook/useSheet";
 import { useGrimoireSheet } from "./hook/useGrimoireSheet";
+import { AttackType } from "../Form/components/Attacks/Attacks.types";
 
 function CharacterSheet({
   nd,
@@ -114,7 +115,9 @@ function CharacterSheet({
         attacks.map((attack, index) => (
           <div key={index}>
             <span className="text-primary font-bold">
-              {attack.type === "melee" ? "Corpo a Corpo" : "Distância"}{" "}
+              {attack.type === AttackType.MELEE
+                ? "Corpo a Corpo"
+                : "Distância"}{" "}
             </span>
             <span>+{statistic?.bônus_de_ataque} </span>
             <span>

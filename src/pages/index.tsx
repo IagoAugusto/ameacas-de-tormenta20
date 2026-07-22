@@ -27,7 +27,7 @@ export default function Home() {
 
       <main className="w-full container">
         <h1 className="text-red text-6xl mb-12 font-metamorphous">Criação de Ameaças</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Form onSubmit={handleSubmit} />
           {statistics && <Sheet {...statistics} />}
         </div>

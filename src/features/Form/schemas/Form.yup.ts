@@ -2,6 +2,7 @@ import { Roles, SavingThrows } from "@/features/Sheet/types/sheet";
 import * as yup from "yup";
 import { FormInput } from "../types/Form.types";
 import { roles, savingThrows } from "../types/Form.model";
+import { AttackType } from "../components/Attacks/Attacks.types";
 
 export const validationSchema: yup.ObjectSchema<FormInput> = yup.object({
   role: yup.mixed<Roles>().oneOf(roles, "Invalid value").required("Required"),
@@ -34,9 +35,10 @@ export const validationSchema: yup.ObjectSchema<FormInput> = yup.object({
     .array()
     .of(
       yup.object().shape({
+        name: yup.string().required(),
         type: yup
           .string()
-          .oneOf(["melee", "range"], "Tipo inválido")
+          .oneOf(Object.values(AttackType), "Tipo inválido")
           .required(),
         damage: yup.string().required(),
       }),

@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import Select from "@/components/Select";
 import SavingThrowsSelect from "./components/SavingThrowsSelect";
 import { FormInput, FormProps } from "./types/Form.types";
@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import minions from "./data/minions.json";
 import Attacks from "./components/Attacks";
 import Input from "@/components/Input";
+import Autocomplete from "@/components/Autocomplete/Autocomplete";
 
 function Form({ onSubmit }: FormProps) {
   const methods = useForm<FormInput>({
@@ -106,6 +107,10 @@ function Form({ onSubmit }: FormProps) {
         </fieldset>
 
         <fieldset className="saving-throws grid grid-cols-1 md:grid-cols-3 gap-3">
+          <legend className="text-primary text-xl font-bold mb-2">
+            <h2>Resistências</h2>
+          </legend>
+
           <SavingThrowsSelect
             label="Forte"
             error={errors.strong}

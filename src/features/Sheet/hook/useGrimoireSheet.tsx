@@ -1,11 +1,9 @@
+import { Attack, AttackType } from "@/features/Form/components/Attacks/Attacks.types";
 import { SavingThrows } from "../types/sheet";
 
 interface useGrimoireSheetProps {
   nd: string;
-  attacks: {
-    type: "melee" | "range";
-    damage: string;
-  }[];
+  attacks: Attack[];
   charisma: number;
   constitution: number;
   dexterity: number;
@@ -199,7 +197,7 @@ export const useGrimoireSheet = ({
     pilotagemoutros: "0",
     pontaria_treinada: "0",
     pontariaatributo2: "@{des_mod} + @{condicaoperfisico} + @{condicaocego}",
-    pontariaoutros: "0",
+    pontariaoutros: statistic.bônus_de_ataque - dexterity,
     reflexos_treinada: "0",
     reflexosatributo2: "@{des_mod} + @{condicaoperfisico} + @{condicaocego}",
     reflexosoutros: getSavingThrowValue("reflex") - dexterity,
@@ -213,7 +211,7 @@ export const useGrimoireSheet = ({
     vontadeatributo2: "@{sab_mod} + @{condicaopermental}",
     vontadeoutros: getSavingThrowValue("will") - wisdom,
     attacks: attacks.map((attack) => ({
-      nomeataque: attack.type === "melee" ? "Corpo a Corpo" : "Distância",
+      nomeataque: attack.name,
       danoataque: attack.damage,
       danocriticoataque: `${attack.damage} + ${attack.damage}`, //TODO: maybe add strength
       danoextraataque: getDamageRoll(statistic.dano_médio, attack.damage)
@@ -225,7 +223,7 @@ export const useGrimoireSheet = ({
       multiplicadorcriticoataque: "2",
       ataquedescricao: "",
       ataquepericia:
-        attack.type === "melee"
+        attack.type === AttackType.MELEE
           ? "@{lutatotal}+@{condicaomodataquecc}+@{condicaomodataque}"
           : "@{pontariatotal}+@{condicaomodataquecc}+@{condicaomodataque}",
       ataquetipodedano: "",

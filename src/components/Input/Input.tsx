@@ -17,7 +17,7 @@ function Input(
         {label}
       </label>
       <input
-        className={classNames("p-3 rounded-md border-solid border-2", {
+        className={classNames("p-3 h-11 rounded-md border-solid border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent", {
           "border-black": !error,
           "border-red": error,
         })}

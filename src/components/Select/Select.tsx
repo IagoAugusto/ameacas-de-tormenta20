@@ -31,7 +31,7 @@ function Select(
       </div>
       <select
         className={classNames(
-          "p-3 rounded-md border-solid border-2 border-black",
+          "p-3 h-11 rounded-md border bg-transparent border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent",
           { "border-red": error },
         )}
         ref={ref}
