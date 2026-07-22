@@ -23,7 +23,6 @@ export default function Attacks() {
   const role = watch("role");
   const formAttacks = watch("attacks");
   const statistic = useStaticticSheet(nd, role);
-  console.log("statistic", watch(`attacks.0.name`));
 
   function getDiceAndDamage(attackDamage: string): number {
     const diceQuantity = parseInt(attackDamage.split("d")[0]);
